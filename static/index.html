@@ -4,14 +4,21 @@
     <meta charset="UTF-8">
     <title>Lilly JS recruitment task</title>
     <link rel="stylesheet" href="styles.css">
-</head>
+</head> 
 <body>
-<div>
-    <span class="spinner"></span>
-</div>
+    <div class="mainContent">
+        <div class="spinnerContainer">
+            <div class="spinner"></div>
+        </div> 
+        <form action="/stocks" method="get">
+            <div class="buttonsContainer">
+                <button id="generateStockDataButton">Load Available Stocks</button>
+            </div>
+        </form>
+        
+        <canvas id="chart" width="1000" height="600"></canvas>
+    </div>      
 
-<canvas id="chart" width="1000" height="600"></canvas>
-
-<script src="scripts.js" defer></script>
+    <script src="scripts.js" defer></script>
 </body>
 </html>
