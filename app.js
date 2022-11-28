@@ -8,18 +8,24 @@ const app = express() // call the object to create an express application (can t
 app.use(express.static(path.join(__dirname, 'static'))) 
 
 //function to call the stocks.getStocks function to display available stocks
-//returns an array of each stock, a promise
 app.get('/stocks', async (req, res) => {
   const stockSymbols = await stocks.getStocks()
-  console.log(stockSymbols); //checking for call
-  res.send({ stockSymbols })
+  console.log(stockSymbols);
+  res.send('<h1>The available stocks are:</h1>' + stockSymbols + '<h2>See data on one of the above stocks in the previous page!</h2>')  
 })
 
 //function to call the stocks.getStockPoints function to display the data for an individual stock
 app.get('/stocks/:symbol', async (req, res) => {
   const { params: { symbol } } = req
-  const data = await stocks.getStockPoints(symbol, new Date())
-  res.send(data)
+  try{
+    const data = await stocks.getStockPoints(symbol, new Date())
+    console.log('')
+    console.log(symbol + ':')
+    console.table(data, ["timestamp", "value"])
+  } catch (e){
+      console.error(e)
+      res.send('<h1>The data could not be retrieved! Please go back and try again.</h1>')
+    }
 })
 
 app.listen(3000, () => console.log('Server is running!'))

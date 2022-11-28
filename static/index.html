@@ -10,10 +10,22 @@
         <div class="spinnerContainer">
             <div class="spinner"></div>
         </div> 
+        
         <form action="/stocks" method="get">
             <div class="buttonsContainer">
                 <button id="generateStockDataButton">Load Available Stocks</button>
             </div>
+        </form>
+
+        <script type="text/javascript">
+            function get_action(form) {
+                form.action = '/stocks/'+document.getElementById("stockInput").value;
+            }
+        </script>
+
+        <form onsubmit="get_action(this);">
+            <input type="text" id="stockInput" value="MSFT">
+            <input type="submit" id="getStockData" value="Get Stock Data">
         </form>
         
         <canvas id="chart" width="1000" height="600"></canvas>
